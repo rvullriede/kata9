@@ -30,9 +30,12 @@ It simply applies all matching pricing rules based on the rule's amount (startin
 For dividable Units like WEIGHT the prince of any remaining amount is calculated based on the last rule (the rule with the smallest amount).
 
 ### Data structure/types and validation
+In my solution _all_ pricing information are based on PricingRules (instead of having pricing rules for amounts > 1 and a separate price on the article object(,
+That way all pricing follows the same structure and can be found on one place.
+That makes it easier to manage persistence but also to have a convenient UI/UX. Needless to say that the BI/DWH guys who might need to integrate this would also like it ;-)
+
 Although using a ```BigDecimal``` for monetary amount has its own problems I believe it's better than the alternative (float/double due to its imprecision, ints/long with cents values due to its lack of clarity).
 For the original scope of this exercise is not even required (the precision of a float/double would be sufficient) I use it anyway, mainly to make a point of NEVER use a float for money. PERIOD.
-
 
 All input parameters are validated. I do remember you've said "production code" with the example of "No NullPointerException."
 In my opinion a NullPointerException in itself is not bad at all, only if it happens accidentally... ;-)
