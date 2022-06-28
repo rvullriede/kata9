@@ -11,7 +11,7 @@ Cmd: ```mvn test```
 
 ## Solution Approach
 I decided to NOT provide an artificially bloated Spring Boot based REST service because it actually won't show much in terms of problem-solving and would be rather meaningless without actually business requirements.
-Instead, I decided to extend the scope differently, by supporting not pricing rules based on counting (QUANTITY) but also based on other units (e.g. WEIGHT).
+Instead, I decided to extend the scope differently, by supporting not only pricing rules based on counting (QUANTITY) but also based on other units (e.g. WEIGHT).
 
 The approach does not require any knowledge about the used units, except if they are dividable (e.g. a weight if 1 kg can be divided into arbitrary amount, e.g. 123g of ham) or not (e.g. counting apples) and can be easily extended.
 
@@ -30,7 +30,7 @@ It simply applies all matching pricing rules based on the rule's amount (startin
 For dividable Units like WEIGHT the prince of any remaining amount is calculated based on the last rule (the rule with the smallest amount).
 
 ### Data structure/types and validation
-In my solution _all_ pricing information are based on PricingRules (instead of having pricing rules for amounts > 1 and a separate price on the article object(,
+In my solution _all_ pricing information are based on PricingRules (instead of having pricing rules for amounts > 1 and a separate price on the article object).
 That way all pricing follows the same structure and can be found on one place.
 That makes it easier to manage persistence but also to have a convenient UI/UX. Needless to say that the BI/DWH guys who might need to integrate this would also like it ;-)
 
@@ -39,7 +39,7 @@ For the original scope of this exercise is not even required (the precision of a
 
 All input parameters are validated. I do remember you've said "production code" with the example of "No NullPointerException."
 In my opinion a NullPointerException in itself is not bad at all, only if it happens accidentally... ;-)
-I make regular use of them for simple param validation (by using Objects.requireNonNull()) so it will them encounter in my code but on purpose!
+I make regular use of them for simple param validation (by using Objects.requireNonNull()) so it will them encounter in my code but always on purpose!
 
 
 ## Tests
